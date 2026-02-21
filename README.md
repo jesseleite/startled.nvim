@@ -1,4 +1,4 @@
-# Startled
+# Startled.nvim
 
 Custom static start screens for Neovim, made easy 🌴
 
@@ -32,20 +32,14 @@ This is done by rendering a borderless, easy-to-configure popup in the center of
 
 1. Install using your favourite package manager:
 
-    **Using [packer.nvim](https://github.com/wbthomason/packer.nvim):**
-
-    ```lua
-    use { 'jesseleite/nvim-startled' }
-    ```
-
     **Using [lazy.nvim](https://github.com/folke/lazy.nvim):**
 
     ```lua
     {
-      'jesseleite/nvim-startled',
+      "jesseleite/startled.nvim",
       lazy = false,
       opts = {
-        -- All of your `setup(opts)` will go here
+        -- All of your `setup(opts)` will go here when using lazy.nvim
       },
     }
     ```
@@ -57,13 +51,13 @@ This is done by rendering a borderless, easy-to-configure popup in the center of
 The default config automatically links the following highlight groups and default content:
 
 ```lua
-require('startled').setup {
+require("startled").setup {
   highlights = {
-    StartledPrimary = 'String',
-    StartledSecondary = 'Type',
-    StartledMuted = 'Comment',
+    StartledPrimary = "String",
+    StartledSecondary = "Type",
+    StartledMuted = "Comment",
   },
-  content = require('startled.content.default'),
+  content = require("startled.content.default"),
 }
 ```
 
@@ -72,11 +66,11 @@ require('startled').setup {
 Feel free to customize the linked highlight groups, or even reference specific hex colors:
 
 ```lua
-require('startled').setup {
+require("startled").setup {
   highlights = {
-    StartledPrimary = '#E4609B',
-    StartledSecondary = '#47BAC0',
-    StartledMuted = '#535353',
+    StartledPrimary = "#E4609B",
+    StartledSecondary = "#47BAC0",
+    StartledMuted = "#535353",
   },
 }
 ```
@@ -84,9 +78,9 @@ require('startled').setup {
 If you wish to add more highlight groups, they must start with the `Startled` prefix:
 
 ```lua
-require('startled').setup {
+require("startled").setup {
   highlights = {
-    StartledOrange = '#FB8907',
+    StartledOrange = "#FB8907",
   },
 }
 ```
@@ -98,11 +92,11 @@ require('startled').setup {
 All content nodes are static text nodes by default. Here, we'll render two static text nodes, with a `spacer` node to separate them:
 
 ```lua
-require('startled').setup {
+require("startled").setup {
   content = {
-    { text = 'I use Neovim BTW!' },
-    { type = 'spacer' },
-    { text = 'Copyright 2025' },
+    { text = "I use Neovim BTW!" },
+    { type = "spacer" },
+    { text = "Copyright 2025" },
   },
 }
 ```
@@ -112,7 +106,7 @@ require('startled').setup {
 If you have multiple lines that you wish to be rendered together, you can pass a table of lines into a node's `text` config:
 
 ```lua
-require('startled').setup {
+require("startled").setup {
   content = {
     {
       text = {
@@ -130,11 +124,11 @@ require('startled').setup {
 You can set the default highlighting on a node using the `hl` config:
 
 ```lua
-require('startled').setup {
+require("startled").setup {
   content = {
     {
-      text = 'I use Neovim BTW!',
-      hl = 'StartledSecondary',
+      text = "I use Neovim BTW!",
+      hl = "StartledSecondary",
     },
   },
 }
@@ -145,11 +139,11 @@ require('startled').setup {
 If you wish to highlight specific text within a line, you can wrap text with your highlight group using HTML-like syntax:
 
 ```lua
-require('startled').setup {
+require("startled").setup {
   content = {
     {
-      text = 'I use <StartledPrimary>Neovim</StartledPrimary> BTW!',
-      hl = 'StartledSecondary',
+      text = "I use <StartledPrimary>Neovim</StartledPrimary> BTW!",
+      hl = "StartledSecondary",
     },
   },
 }
@@ -160,7 +154,7 @@ require('startled').setup {
 By default, all lines will be centered on screen, but you can disable centering with `center = false`:
 
 ```lua
-require('startled').setup {
+require("startled").setup {
   content = {
     {
       text = {
@@ -181,7 +175,7 @@ You can also `center = 'block'` to center a multi-line text block as a whole, ra
 When rendering multi-line ASCII art, it's recommended that you provide a `[[ multiline literal string ]]`, so that you don't have to worry about escaping things like quotes and backslashes.
 
 ```lua
-require('startled').setup {
+require("startled").setup {
   content = {
     {
       text = [[
@@ -191,7 +185,7 @@ require('startled').setup {
 |  _  |  __/ | | (_) | | |_) |  __/ (_| | |_| | |_| |  _| |_| | |_
 |_| |_|\___|_|_|\___/  |____/ \___|\__,_|\__,_|\__|_|_|  \__,_|_(_)
 ]],
-      hl = 'StartledPrimary',
+      hl = "StartledPrimary",
     },
   },
 }
@@ -204,14 +198,14 @@ Just be mindful to remove indentation at the start of each line within your `tex
 To render dynamic content, you can pass an anonymous function to a node's `text` config:
 
 ```lua
-require('startled').setup {
+require("startled").setup {
   content = {
     {
       text = function ()
-        return require('some.quote.provider').get_random_quote()
+        return require("some.quote.provider").get_random_quote()
       end,
       wrap = 60,
-      hl = 'StartledMuted',
+      hl = "StartledMuted",
     },
   },
 }
